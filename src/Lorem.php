@@ -117,8 +117,9 @@ class Lorem
         "urna"
     ];
 
-    public function __construct($words = null){
-        if($words){
+    public function __construct($words = null)
+    {
+        if ($words) {
             $this->words = $words;
         }
     }
@@ -129,7 +130,7 @@ class Lorem
     }
 
 
-    public function generateWords($count = 3): string
+    public function generateWords(int $count = 3): string
     {
         $string = "";
         foreach (range(1, $count) as $index) {
@@ -140,11 +141,11 @@ class Lorem
         return $this->clean($string);
     }
 
-    public function genereateSentences($count = 3): string
+    public function genereateSentences(int $count = 3): string
     {
 
         $sentences = "";
-        foreach(range(1, $count) as $index){
+        foreach (range(1, $count) as $index) {
             $wordCount = rand(3, 8);
             $sentences .= $this->generateWords($wordCount) . " ";
         }
@@ -153,13 +154,24 @@ class Lorem
 
     }
 
-    public function generateParagraphs($count = 3){
+    public static function sentences(int $count = 3): string
+    {
+        return (new self)->genereateSentences($count);
+    }
+
+    public function generateParagraphs(int $count = 3)
+    {
         $paragraphs = "";
-        foreach(range(1, $count) as $index){
+        foreach (range(1, $count) as $index) {
             $paragraphs .= $this->genereateSentences(rand(5, 15)) . "\\n";
         }
 
         return trim($paragraphs, "\\n ");
+    }
+
+    public static function paragraphs(int $count = 3): string
+    {
+        return (new self)->generateParagraphs($count);
     }
 
     private function applyRandomSemiColon($word)
@@ -175,6 +187,11 @@ class Lorem
     private function clean(string $string): string
     {
         return trim(ucfirst(strtolower($string)), ', ') . ".";
+    }
+
+    public static function words(int $count = 3): string
+    {
+        return (new self)->generateWords($count);
     }
 
 

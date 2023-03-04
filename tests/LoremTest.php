@@ -146,12 +146,16 @@ class LoremTest extends TestCase
     {
         $words = explode(' ', $this->wordsString);
         $this->assertCount(5, $words);
+
+        $words = explode(' ', Lorem::words(6));
+        $this->assertCount(6, $words);
     }
 
     /** @test */
     public function first_word_is_always_capital_and_last_word_ends_with_period()
     {
         $words = explode(' ', $this->wordsString);
+
         preg_match('/^[A-Z]/', $words[0], $match);
         $this->assertCount(1, $match);
     }
@@ -161,6 +165,9 @@ class LoremTest extends TestCase
     {
         $sentences = explode(".", trim($this->sentenceString, ". "));
         $this->assertCount(5, $sentences);
+
+        $sentences = explode(".", trim(Lorem::sentences(6), ". "));
+        $this->assertCount(6, $sentences);
     }
 
     /** @test */
@@ -168,6 +175,9 @@ class LoremTest extends TestCase
     {
         $paragraphs = explode("\\n", $this->paragraphString);
         $this->assertCount(5, $paragraphs);
+
+        $paragraphs = explode("\\n", Lorem::paragraphs(6));
+        $this->assertCount(6, $paragraphs);
     }
 
     /** @test */
