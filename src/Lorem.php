@@ -2,10 +2,11 @@
 
 namespace VildanHakanaj\Lorem;
 
-use http\Exception\InvalidArgumentException;
-
 class Lorem
 {
+    /**
+     * @var string[]
+     */
     private array $words = [
         "Lorem",
         "ipsum",
@@ -117,6 +118,9 @@ class Lorem
         "urna"
     ];
 
+    /**
+     * @param $words
+     */
     public function __construct($words = null)
     {
         if ($words) {
@@ -124,12 +128,20 @@ class Lorem
         }
     }
 
-    public static function fromWords(array $words): Lorem
+    /**
+     * @param array $words
+     * @return Lorem
+     */
+    public static function withWords(array $words): Lorem
     {
         return new self($words);
     }
 
 
+    /**
+     * @param int $count
+     * @return string
+     */
     public function generateWords(int $count = 3): string
     {
         $string = "";
@@ -141,7 +153,20 @@ class Lorem
         return $this->clean($string);
     }
 
-    public function genereateSentences(int $count = 3): string
+    /**
+     * @param int $count
+     * @return string
+     */
+    public static function words(int $count = 3): string
+    {
+        return (new self)->generateWords($count);
+    }
+
+    /**
+     * @param int $count
+     * @return string
+     */
+    public function generateSentences(int $count = 3): string
     {
 
         $sentences = "";
@@ -154,32 +179,51 @@ class Lorem
 
     }
 
+    /**
+     * @param int $count
+     * @return string
+     */
     public static function sentences(int $count = 3): string
     {
-        return (new self)->genereateSentences($count);
+        return (new self)->generateSentences($count);
     }
 
-    public function generateParagraphs(int $count = 3)
+    /**
+     * @param int $count
+     * @return string
+     */
+    public function generateParagraphs(int $count = 3): string
     {
         $paragraphs = "";
         foreach (range(1, $count) as $index) {
-            $paragraphs .= $this->genereateSentences(rand(5, 15)) . "\\n";
+            $paragraphs .= $this->generateSentences(rand(5, 15)) . "\\n";
         }
 
         return trim($paragraphs, "\\n ");
     }
 
+    /**
+     * @param int $count
+     * @return string
+     */
     public static function paragraphs(int $count = 3): string
     {
         return (new self)->generateParagraphs($count);
     }
 
-    private function applyRandomSemiColon($word)
+    /**
+     * @param string $word
+     * @return string
+     */
+    private function applyRandomSemiColon(string $word): string
     {
         return rand(0, 10) < 2 ? $word . ',' : $word;
     }
 
-    private function getRandomWord()
+    /**
+     * @return string
+     */
+    private function getRandomWord():  string
     {
         return $this->words[rand(0, count($this->words) - 1)];
     }
@@ -187,11 +231,6 @@ class Lorem
     private function clean(string $string): string
     {
         return trim(ucfirst(strtolower($string)), ', ') . ".";
-    }
-
-    public static function words(int $count = 3): string
-    {
-        return (new self)->generateWords($count);
     }
 
 

@@ -1,6 +1,5 @@
 <?php
 
-use JetBrains\PhpStorm\NoReturn;
 use VildanHakanaj\Lorem\Lorem;
 use PHPUnit\Framework\TestCase;
 
@@ -129,7 +128,7 @@ class LoremTest extends TestCase
     {
         $lorem = new Lorem();
         $this->wordsString = $lorem->generateWords(5);
-        $this->sentenceString = $lorem->genereateSentences(5);
+        $this->sentenceString = $lorem->generateSentences(5);
         $this->paragraphString = $lorem->generateParagraphs(5);
     }
 
@@ -190,7 +189,7 @@ class LoremTest extends TestCase
 
     /** @test */
     public function it_can_create_instance_from_static_method_with_word_override(){
-        $lorem = Lorem::fromWords($this->getData("override"));
+        $lorem = Lorem::withWords($this->getData("override"));
 
         $wordsString = $lorem->generateWords(4);
         $words = array_intersect(array_map(fn($e) => strtolower($e), $this->getData("override")), array_map(fn($e) => strtolower($e), explode(" ", trim($wordsString, '. '))));

@@ -2,7 +2,7 @@
   "name": "vildanhakanaj/php-lorem",
   "description": "A simple package that generates lorem ipsum.",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "authors": [
     {
       "name": "Vildan Hakanaj"
@@ -17,6 +17,9 @@
     "psr-4": {
       "VildanHakanaj\\Test\\": "tests/"
     }
+  },
+  "require": {
+    "php": "^7.4 || ^8.2"
   },
   "require-dev": {
     "symfony/var-dumper": "^6.2",
