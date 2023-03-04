@@ -7,19 +7,35 @@ A simple package to generate quick lorem ipsum text for any testing or database 
 ```bash
 composer require vildanhakanaj/php-lorem
 ```
-
+---
 ### Requirements
 
 php ^7.4 || ^8.2
 
 ### Usage
 
-#### Words
+---
+
+#### Initialize
 ```php
 $lorem = new Lorem();
+// OR 
+$lorem = new Lorem([
+    "override",
+    "default",
+    "words",
+    "with",
+    "yours"
+])
+```
+
+#### Words
+```php
 // Generate words
 $lorem->words(5); // Nulla id aliqua, tempus.
-// Static
+
+// OR
+
 Lorem::words(5);
 ```
 
@@ -27,14 +43,22 @@ Lorem::words(5);
 
 ```php
 $lorem->generateSentences(5); 
+
+// OR
+
 Lorem::sentences(5);
+
 // Sed, elit consectetur imperdiet. Lectus non euismod id egestas egestas. Mauris elit faucibus sem. Faucibus volutpat mi. Iaculis quis sagittis.
 ```
 #### Paragraphs
 
 ```php
 $lorem->generateParagraphs(5); 
+
+// OR
+
 Lorem::paragraphs(5);
+
 // Mattis non egestas sed. Vel eget vel imperdiet aliqua urna magna dolor. Laoreet nibh eu purus. Faucibus dolor egestas pellentesque odio erat egestas. Nulla molestie labore a, faucibus.
 //Curabitur sit, viverra aliqua. Ipsum, do, lorem, lectus urna tellus a dolore. Erat et eiusmod consectetur aliquet nibh imperdiet, non. Egestas, do pellentesque malesuada, labore elit nunc imperdiet. Mattis accumsan, erat dolore massa lorem dui. Do, eu sit cursus, non ipsum adipiscing laoreet.
 //Et, lorem a, tincidunt consectetur magna. Sem non ut ipsum ut, amet. Nibh, laoreet, quis egestas ornare iaculis. Egestas eu mattis, sed. Tincidunt, sit enim nam, sed fringilla, incididunt enim.
@@ -46,4 +70,16 @@ Lorem::paragraphs(5);
 
 ```php
 Lorem::fromWords(["this", "will", "override", "default"])->words(5); // Will this, will, default
+
+// OR 
+
+$lorem = new Lorem([
+    "override",
+    "default",
+    "words",
+    "with",
+    "yours"
+])
+
+$lorem->words(5);
 ```
