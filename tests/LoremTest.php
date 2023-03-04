@@ -12,48 +12,8 @@ class LoremTest extends TestCase
     private string $sentenceString;
     private string $paragraphString;
 
-    protected function setUp(): void
-    {
-        $this->lorem = new Lorem();
-        $this->wordsString = $this->lorem->generateWords(5);
-        $this->sentenceString = $this->lorem->genereateSentences(5);
-        $this->paragraphString = $this->lorem->generateParagraphs(5);
-    }
-
-    /** @test */
-    public function it_can_create_an_instance(){
-        $lorem = new Lorem();
-        $this->assertInstanceOf(Lorem::class, $lorem);
-    }
-
-    /** @test */
-    public function it_can_generate_words_with_count(){
-        $words = explode(' ', $this->wordsString);
-        $this->assertCount(5, $words);
-    }
-
-    /** @test */
-    #[NoReturn] public function first_word_is_always_capital_and_last_word_ends_with_period(){
-        $words = explode(' ', $this->wordsString);
-        preg_match('/^[A-Z]/', $words[0], $match);
-        $this->assertCount(1, $match);
-    }
-
-    /** @test */
-    #[NoReturn] public function it_can_generate_sentences(){
-        $sentences = explode(".", trim($this->sentenceString, ". "));
-        $this->assertCount(5, $sentences);
-    }
-
-    /** @test */
-    #[NoReturn] public function it_can_generate_paragraphs(){
-        $paragraphs = explode("\\n", $this->paragraphString);
-        $this->assertCount(5, $paragraphs);
-    }
-
-
-    private function data(){
-        return [
+    protected array $data = [
+        "original" => [
             "Lorem",
             "ipsum",
             "dolor",
@@ -162,7 +122,77 @@ class LoremTest extends TestCase
             "at",
             "lectus",
             "urna"
-        ];
+        ],
+        "override" => ["This", "should", "override", "original"]
+    ];
+
+    protected function setUp(): void
+    {
+        $this->lorem = new Lorem();
+        $this->wordsString = $this->lorem->generateWords(5);
+        $this->sentenceString = $this->lorem->genereateSentences(5);
+        $this->paragraphString = $this->lorem->generateParagraphs(5);
+    }
+
+    /** @test */
+    public function it_can_create_an_instance()
+    {
+        $lorem = new Lorem();
+        $this->assertInstanceOf(Lorem::class, $lorem);
+    }
+
+    /** @test */
+    public function it_can_generate_words_with_count()
+    {
+        $words = explode(' ', $this->wordsString);
+        $this->assertCount(5, $words);
+    }
+
+    /** @test */
+    public function first_word_is_always_capital_and_last_word_ends_with_period()
+    {
+        $words = explode(' ', $this->wordsString);
+        preg_match('/^[A-Z]/', $words[0], $match);
+        $this->assertCount(1, $match);
+    }
+
+    /** @test */
+    public function it_can_generate_sentences()
+    {
+        $sentences = explode(".", trim($this->sentenceString, ". "));
+        $this->assertCount(5, $sentences);
+    }
+
+    /** @test */
+    public function it_can_generate_paragraphs()
+    {
+        $paragraphs = explode("\\n", $this->paragraphString);
+        $this->assertCount(5, $paragraphs);
+    }
+
+    /** @test */
+    public function it_can_override_the_default_words()
+    {
+        $lorem = new Lorem($this->getData("override"));
+        $wordsString = $lorem->generateWords(4);
+        $words = array_intersect(array_map(fn($e) => strtolower($e), $this->getData("override")), array_map(fn($e) => strtolower($e), explode(" ", trim($wordsString, '. '))));
+        $this->assertGreaterThan(0, count($words));
+    }
+
+    /** @test */
+    public function it_can_create_instance_from_static_method_with_word_override(){
+        $lorem = Lorem::fromWords($this->getData("override"));
+
+        $wordsString = $lorem->generateWords(4);
+        $words = array_intersect(array_map(fn($e) => strtolower($e), $this->getData("override")), array_map(fn($e) => strtolower($e), explode(" ", trim($wordsString, '. '))));
+
+        $this->assertInstanceOf(Lorem::class, $lorem);
+        $this->assertGreaterThan(0, count($words));
+    }
+
+    private function getData($key = null)
+    {
+        return $this->data[$key ?? "original"];
     }
 
 }

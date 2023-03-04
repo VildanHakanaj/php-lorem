@@ -2,6 +2,8 @@
 
 namespace VildanHakanaj\Lorem;
 
+use http\Exception\InvalidArgumentException;
+
 class Lorem
 {
     private array $words = [
@@ -114,6 +116,17 @@ class Lorem
         "lectus",
         "urna"
     ];
+
+    public function __construct($words = null){
+        if($words){
+            $this->words = $words;
+        }
+    }
+
+    public static function fromWords(array $words): Lorem
+    {
+        return new self($words);
+    }
 
 
     public function generateWords($count = 3): string
