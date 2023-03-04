@@ -7,6 +7,18 @@ use PHPUnit\Framework\TestCase;
 class LoremTest extends TestCase
 {
 
+    private Lorem $lorem;
+    private string $wordsString;
+    private string $sentenceString;
+    private string $paragraphString;
+
+    protected function setUp(): void
+    {
+        $this->lorem = new Lorem();
+        $this->wordsString = $this->lorem->generateWords(5);
+        $this->sentenceString = $this->lorem->genereateSentences(5);
+        $this->paragraphString = $this->lorem->generateWords(5);
+    }
 
     /** @test */
     public function it_can_create_an_instance(){
@@ -16,17 +28,21 @@ class LoremTest extends TestCase
 
     /** @test */
     public function it_can_generate_words_with_count(){
-        $string = (new Lorem())->generateWords(5);
-        $words = explode(' ', $string);
+        $words = explode(' ', $this->wordsString);
         $this->assertCount(5, $words);
     }
 
     /** @test */
     #[NoReturn] public function first_word_is_always_capital_and_last_word_ends_with_period(){
-        $string = (new Lorem())->generateWords(5);
-        $words = explode(' ', $string);
+        $words = explode(' ', $this->wordsString);
         preg_match('/^[A-Z]/', $words[0], $match);
         $this->assertCount(1, $match);
+    }
+
+    /** @test */
+    #[NoReturn] public function it_can_generate_sentences(){
+        $sentences = explode(".", trim($this->sentenceString, ". "));
+        $this->assertCount(5, $sentences);
     }
 
 

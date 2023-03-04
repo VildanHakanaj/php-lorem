@@ -127,6 +127,26 @@ class Lorem
         return $this->clean($string);
     }
 
+    public function genereateSentences($count = 3): string
+    {
+
+        $sentences = "";
+        foreach(range(1, $count) as $index){
+            $wordCount = rand(3, 8);
+            $sentences .= $this->generateWords($wordCount) . " ";
+        }
+
+        return trim($sentences, " ");
+
+    }
+
+    public function generateParagraphs($count = 3){
+        $paragraphs = "";
+        foreach(range(1, $count) as $index){
+            return "";
+        }
+    }
+
     private function applyRandomSemiColon($word)
     {
         return rand(0, 10) < 2 ? $word . ',' : $word;
@@ -137,7 +157,7 @@ class Lorem
         return $this->words[rand(0, count($this->words) - 1)];
     }
 
-    private function clean(string $string)
+    private function clean(string $string): string
     {
         return trim(ucfirst(strtolower($string)), ', ') . ".";
     }
