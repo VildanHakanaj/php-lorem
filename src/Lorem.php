@@ -143,8 +143,10 @@ class Lorem
     public function generateParagraphs($count = 3){
         $paragraphs = "";
         foreach(range(1, $count) as $index){
-            return "";
+            $paragraphs .= $this->genereateSentences(rand(5, 15)) . "\\n";
         }
+
+        return trim($paragraphs, "\\n ");
     }
 
     private function applyRandomSemiColon($word)

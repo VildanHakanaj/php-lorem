@@ -17,7 +17,7 @@ class LoremTest extends TestCase
         $this->lorem = new Lorem();
         $this->wordsString = $this->lorem->generateWords(5);
         $this->sentenceString = $this->lorem->genereateSentences(5);
-        $this->paragraphString = $this->lorem->generateWords(5);
+        $this->paragraphString = $this->lorem->generateParagraphs(5);
     }
 
     /** @test */
@@ -43,6 +43,12 @@ class LoremTest extends TestCase
     #[NoReturn] public function it_can_generate_sentences(){
         $sentences = explode(".", trim($this->sentenceString, ". "));
         $this->assertCount(5, $sentences);
+    }
+
+    /** @test */
+    #[NoReturn] public function it_can_generate_paragraphs(){
+        $paragraphs = explode("\\n", $this->paragraphString);
+        $this->assertCount(5, $paragraphs);
     }
 
 
