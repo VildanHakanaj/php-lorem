@@ -1,0 +1,25 @@
+{
+  "name": "vildanhakanaj/php-lorem",
+  "description": "A simple package that generates lorem ipsum.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Vildan Hakanaj"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "VildanHakanaj\\Lorem\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "VildanHakanaj\\Test\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^6.2",
+    "phpunit/phpunit": "^10.0"
+  }
+}
