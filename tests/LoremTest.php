@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 class LoremTest extends TestCase
 {
 
-    private Lorem $lorem;
     private string $wordsString;
     private string $sentenceString;
     private string $paragraphString;
@@ -128,10 +127,10 @@ class LoremTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->lorem = new Lorem();
-        $this->wordsString = $this->lorem->generateWords(5);
-        $this->sentenceString = $this->lorem->genereateSentences(5);
-        $this->paragraphString = $this->lorem->generateParagraphs(5);
+        $lorem = new Lorem();
+        $this->wordsString = $lorem->generateWords(5);
+        $this->sentenceString = $lorem->genereateSentences(5);
+        $this->paragraphString = $lorem->generateParagraphs(5);
     }
 
     /** @test */
