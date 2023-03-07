@@ -59,17 +59,40 @@ $lorem->generateParagraphs(5);
 
 Lorem::paragraphs(5);
 
-// Mattis non egestas sed. Vel eget vel imperdiet aliqua urna magna dolor. Laoreet nibh eu purus. Faucibus dolor egestas pellentesque odio erat egestas. Nulla molestie labore a, faucibus.
-//Curabitur sit, viverra aliqua. Ipsum, do, lorem, lectus urna tellus a dolore. Erat et eiusmod consectetur aliquet nibh imperdiet, non. Egestas, do pellentesque malesuada, labore elit nunc imperdiet. Mattis accumsan, erat dolore massa lorem dui. Do, eu sit cursus, non ipsum adipiscing laoreet.
-//Et, lorem a, tincidunt consectetur magna. Sem non ut ipsum ut, amet. Nibh, laoreet, quis egestas ornare iaculis. Egestas eu mattis, sed. Tincidunt, sit enim nam, sed fringilla, incididunt enim.
-//Adipiscing lacus sed sed. Quis ornare ullamcorper id. Imperdiet non sodales. Eiusmod sodales eget tempus do cras, non tempus. Elit, urna incididunt dolor, dolore et nulla fringilla. Tellus ornare a turpis, ultrices. Urna eu ut ut. Consectetur tempor volutpat, condimentum. Amet est quis amet vel purus gravida consectetur. Accumsan dignissim, consectetur ullamcorper, arcu pellentesque. Adipiscing sodales lectus lacus labore. Dolore sed dui euismod. Fermentum ipsum urna non. Gravida consectetur egestas ut tincidunt erat pellentesque, id.
-//Massa, aliqua, laoreet consectetur. Sem purus, sed eu, sed enim leo. Pellentesque id morbi sodales, lorem, id. Volutpat sed consectetur ut. Egestas nunc a. Ut incididunt leo enim lobortis. Consectetur imperdiet aliqua. Purus diam accumsan nibh eget at scelerisque. Diam adipiscing id id adipiscing. Gravida sed laoreet ullamcorper faucibus. Lorem, egestas vestibulum leo.
+/*
+ Mattis non egestas sed. Vel eget vel imperdiet aliqua urna magna dolor. Laoreet nibh eu purus. Faucibus dolor egestas pellentesque odio erat egestas. Nulla molestie labore a, faucibus.
+ Curabitur sit, viverra aliqua. Ipsum, do, lorem, lectus urna tellus a dolore. Erat et eiusmod consectetur aliquet nibh imperdiet, non. Egestas, do pellentesque malesuada, labore elit nunc imperdiet. Mattis accumsan, erat dolore massa lorem dui. Do, eu sit cursus, non ipsum adipiscing laoreet.
+ Et, lorem a, tincidunt consectetur magna. Sem non ut ipsum ut, amet. Nibh, laoreet, quis egestas ornare iaculis. Egestas eu mattis, sed. Tincidunt, sit enim nam, sed fringilla, incididunt enim.
+ Adipiscing lacus sed sed. Quis ornare ullamcorper id. Imperdiet non sodales. Eiusmod sodales eget tempus do cras, non tempus. Elit, urna incididunt dolor, dolore et nulla fringilla. Tellus ornare a turpis, ultrices. Urna eu ut ut. Consectetur tempor volutpat, condimentum. Amet est quis amet vel purus gravida consectetur. Accumsan dignissim, consectetur ullamcorper, arcu pellentesque. Adipiscing sodales lectus lacus labore. Dolore sed dui euismod. Fermentum ipsum urna non. Gravida consectetur egestas ut tincidunt erat pellentesque, id.
+ Massa, aliqua, laoreet consectetur. Sem purus, sed eu, sed enim leo. Pellentesque id morbi sodales, lorem, id. Volutpat sed consectetur ut. Egestas nunc a. Ut incididunt leo enim lobortis. Consectetur imperdiet aliqua. Purus diam accumsan nibh eget at scelerisque. Diam adipiscing id id adipiscing. Gravida sed laoreet ullamcorper faucibus. Lorem, egestas vestibulum leo.
+*/
+```
+
+#### Generate paragraphs with p tags
+```php
+$lorem->generateParagraphs(1, true);
+
+// OR
+
+Lorem::paragraphs(1, true);
+/*
+<p>
+    Massa, aliqua, laoreet consectetur.
+    Sem purus, sed eu, sed enim leo.
+    Pellentesque id morbi sodales, lorem, id.
+    Volutpat sed consectetur ut.
+    Egestas nunc a. Ut incididunt leo enim lobortis.
+    Consectetur imperdiet aliqua. Purus diam accumsan nibh eget at scelerisque.
+    Diam adipiscing id id adipiscing. Gravida sed laoreet ullamcorper faucibus.
+    Lorem, egestas vestibulum leo.
+</p>
+*/
 ```
 
 #### Use your own words
 
 ```php
-Lorem::fromWords(["this", "will", "override", "default"])->words(5); // Will this, will, default
+Lorem::fromWords(["this", "will", "override", "the", "default"])->words(5); // This will override, default
 
 // OR 
 
@@ -79,7 +102,7 @@ $lorem = new Lorem([
     "words",
     "with",
     "yours"
-])
+]);
 
 $lorem->words(5);
 ```
