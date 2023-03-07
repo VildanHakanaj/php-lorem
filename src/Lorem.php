@@ -119,9 +119,9 @@ class Lorem
     ];
 
     /**
-     * @param $words
+     * @param array|null $words Words array to override the default words.
      */
-    public function __construct($words = null)
+    public function __construct(array $words = null)
     {
         if ($words) {
             $this->words = $words;
@@ -129,7 +129,7 @@ class Lorem
     }
 
     /**
-     * @param array $words
+     * @param array $words Words array to override the default words
      * @return Lorem
      */
     public static function withWords(array $words): Lorem
@@ -139,23 +139,23 @@ class Lorem
 
 
     /**
-     * @param int $count
-     * @return string
+     * @param int $count Number of words to generate
+     * @return string Concatenated string of words
      */
     public function generateWords(int $count = 3): string
     {
         $words = [];
 
         foreach (range(1, $count) as $index) {
-            $words[] = $this->applyRandomSemiColon($this->getRandomWord());
+            $words[] = $this->applyComma($this->getRandomWord());
         }
 
         return $this->clean(implode(" ", $words));
     }
 
     /**
-     * @param int $count
-     * @return string
+     * @param int $count Number of words to generate
+     * @return string Concatenated string of words
      */
     public static function words(int $count = 3): string
     {
@@ -163,8 +163,8 @@ class Lorem
     }
 
     /**
-     * @param int $count
-     * @return string
+     * @param int $count #Number of sentences generated
+     * @return string Complete string with all the sentences
      */
     public function generateSentences(int $count = 3): string
     {
@@ -179,8 +179,8 @@ class Lorem
     }
 
     /**
-     * @param int $count
-     * @return string
+     * @param int $count Number of sentences to generate
+     * @return string Complete string with all the sentences
      */
     public static function sentences(int $count = 3): string
     {
@@ -188,10 +188,11 @@ class Lorem
     }
 
     /**
-     * @param int $count
-     * @return string
+     * @param int $count Number of paragraphs to generate
+     * @param bool $html Add &lt;p&gt; around the paragraph
+     * @return string Completed string of paragraphs
      */
-    public function generateParagraphs(int $count = 3, $html = false): string
+    public function generateParagraphs(int $count = 3, bool $html = false): string
     {
         $paragraphs = [];
         foreach (range(1, $count) as $index) {
@@ -208,31 +209,36 @@ class Lorem
     }
 
     /**
-     * @param int $count
-     * @return string
+     * @param int $count Number of paragraphs
+     * @param bool $html Add &lt;p&gt; around the paragraph
+     * @return string Completed string of paragraphs
      */
-    public static function paragraphs(int $count = 3): string
+    public static function paragraphs(int $count = 3, bool $html = false): string
     {
-        return (new self)->generateParagraphs($count);
+        return (new self)->generateParagraphs($count, $html);
     }
 
     /**
-     * @param string $word
+     * @param string $word Word to add the semicolon
      * @return string
      */
-    private function applyRandomSemiColon(string $word): string
+    private function applyComma(string $word): string
     {
         return rand(0, 10) < 2 ? $word . ',' : $word;
     }
 
     /**
-     * @return string
+     * @return string Get a random word from the words array
      */
     private function getRandomWord():  string
     {
         return $this->words[rand(0, count($this->words) - 1)];
     }
 
+    /**
+     * @param string $string Cleans the string and adds a period at the end;
+     * @return string
+     */
     private function clean(string $string): string
     {
         return trim(ucfirst(strtolower($string)), ', ') . ".";
