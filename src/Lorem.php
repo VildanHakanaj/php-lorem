@@ -1,6 +1,6 @@
 <?php
 
-namespace VildanHakanaj\Lorem;
+namespace VildanHakanaj;
 
 class Lorem
 {
@@ -144,13 +144,13 @@ class Lorem
      */
     public function generateWords(int $count = 3): string
     {
-        $string = "";
+        $words = [];
+
         foreach (range(1, $count) as $index) {
-            $word = $this->getRandomWord();
-            $string .= $this->applyRandomSemiColon($word) . " ";
+            $words[] = $this->applyRandomSemiColon($this->getRandomWord());
         }
 
-        return $this->clean($string);
+        return $this->clean(implode(" ", $words));
     }
 
     /**
@@ -169,13 +169,12 @@ class Lorem
     public function generateSentences(int $count = 3): string
     {
 
-        $sentences = "";
+        $sentences = [];
         foreach (range(1, $count) as $index) {
-            $wordCount = rand(3, 8);
-            $sentences .= $this->generateWords($wordCount) . " ";
+            $sentences[] = $this->generateWords(rand(3, 8));
         }
 
-        return trim($sentences, " ");
+        return implode(" ", $sentences);
 
     }
 
@@ -194,12 +193,12 @@ class Lorem
      */
     public function generateParagraphs(int $count = 3): string
     {
-        $paragraphs = "";
+        $paragraphs = [];
         foreach (range(1, $count) as $index) {
-            $paragraphs .= $this->generateSentences(rand(5, 15)) . "\\n";
+            $paragraphs[] = $this->generateSentences(rand(5, 15));
         }
 
-        return trim($paragraphs, "\\n ");
+        return implode("\n\n", $paragraphs);
     }
 
     /**

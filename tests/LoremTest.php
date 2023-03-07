@@ -1,6 +1,7 @@
 <?php
 
-use VildanHakanaj\Lorem\Lorem;
+use JetBrains\PhpStorm\NoReturn;
+use VildanHakanaj\Lorem;
 use PHPUnit\Framework\TestCase;
 
 class LoremTest extends TestCase
@@ -169,12 +170,12 @@ class LoremTest extends TestCase
     }
 
     /** @test */
-    public function it_can_generate_paragraphs()
+    #[NoReturn] public function it_can_generate_paragraphs()
     {
-        $paragraphs = explode("\\n", $this->paragraphString);
+        $paragraphs = explode("\n\n", $this->paragraphString);
         $this->assertCount(5, $paragraphs);
 
-        $paragraphs = explode("\\n", Lorem::paragraphs(6));
+        $paragraphs = explode("\n\n", Lorem::paragraphs(6));
         $this->assertCount(6, $paragraphs);
     }
 
