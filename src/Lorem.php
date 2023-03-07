@@ -191,11 +191,17 @@ class Lorem
      * @param int $count
      * @return string
      */
-    public function generateParagraphs(int $count = 3): string
+    public function generateParagraphs(int $count = 3, $html = false): string
     {
         $paragraphs = [];
         foreach (range(1, $count) as $index) {
-            $paragraphs[] = $this->generateSentences(rand(5, 15));
+            $paragraph = $this->generateSentences(rand(5, 15));
+
+            if($html){
+                $paragraph = "<p>$paragraph</p>";
+            }
+
+            $paragraphs[] = $paragraph;
         }
 
         return implode("\n\n", $paragraphs);

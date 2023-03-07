@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 class LoremTest extends TestCase
 {
 
+    private Lorem $lorem;
     private string $wordsString;
     private string $sentenceString;
     private string $paragraphString;
@@ -127,10 +128,10 @@ class LoremTest extends TestCase
 
     protected function setUp(): void
     {
-        $lorem = new Lorem();
-        $this->wordsString = $lorem->generateWords(5);
-        $this->sentenceString = $lorem->generateSentences(5);
-        $this->paragraphString = $lorem->generateParagraphs(5);
+        $this->lorem = new Lorem();
+        $this->wordsString = $this->lorem->generateWords(5);
+        $this->sentenceString = $this->lorem->generateSentences(5);
+        $this->paragraphString = $this->lorem->generateParagraphs(5);
     }
 
     /** @test */
@@ -177,6 +178,17 @@ class LoremTest extends TestCase
 
         $paragraphs = explode("\n\n", Lorem::paragraphs(6));
         $this->assertCount(6, $paragraphs);
+    }
+
+    /** @test */
+    #[NoReturn] public function it_can_wrap_paragraphs_with_html_tags(){
+        $p = $this->lorem->generateParagraphs(3, true);
+        preg_match_all("/<p>(.*)<\/p>/", $p, $match);
+        $this->assertCount(3,$match[1]);
+
+        preg_match_all("/(<p>)+/", $p, $matches);
+        $this->assertCount(3, $matches[1]);
+
     }
 
     /** @test */
