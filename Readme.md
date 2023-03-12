@@ -32,7 +32,7 @@ $lorem = new Lorem([
 #### Words
 ```php
 // Generate words
-$lorem->words(5); // Nulla id aliqua, tempus.
+$lorem->generateWords(5); // Nulla id aliqua, tempus.
 
 // OR
 
